@@ -1,26 +1,149 @@
 @import "tailwindcss";
+@plugin "daisyui";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* StudioSpace Custom Light Theme */
+@plugin "daisyui/theme" {
+  name: "studiospace";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  /* Background & Surface Colors */
+  --color-base-100: #fffcf7;
+  --color-base-200: #f5f0e8;
+  --color-base-300: #ddd0b8;
+  --color-base-content: #252525;
+
+  /* Primary - Champagne Gold */
+  --color-primary: #d4ad68;
+  --color-primary-content: #252525;
+
+  /* Secondary - Dark Charcoal */
+  --color-secondary: #22252a;
+  --color-secondary-content: #ffffff;
+
+  /* Accent */
+  --color-accent: #c49a53;
+  --color-accent-content: #ffffff;
+
+  /* Neutral */
+  --color-neutral: #303238;
+  --color-neutral-content: #ffffff;
+
+  /* Status Colors */
+  --color-info: #3b82f6;
+  --color-info-content: #ffffff;
+
+  --color-success: #16a34a;
+  --color-success-content: #ffffff;
+
+  --color-warning: #f59e0b;
+  --color-warning-content: #252525;
+
+  --color-error: #dc2626;
+  --color-error-content: #ffffff;
+
+  /* Border Radius */
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.75rem;
+
+  /* Component Sizes */
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  /* Borders & Effects */
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
 }
 
+/* StudioSpace Global Colors */
+:root {
+  --background: #f5f0e8;
+  --foreground: #252525;
+  --navbar-background: #22252a;
+  --studio-border: #ddd0b8;
+}
+
+/* Tailwind Theme Variables */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-plus-jakarta);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), Arial, sans-serif;
+  min-height: 100vh;
+}
+
+/* Global Heading Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-plus-jakarta), sans-serif;
+}
+/* ===================================
+   StudioSpace Hero Slider
+=================================== */
+
+.studio-hero .swiper-button-next,
+.studio-hero .swiper-button-prev {
+  color: #d4ad68;
+  width: 44px;
+  height: 44px;
+}
+
+.studio-hero .swiper-button-next::after,
+.studio-hero .swiper-button-prev::after {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.studio-hero .swiper-pagination {
+  bottom: 24px;
+}
+
+.studio-hero .swiper-pagination-bullet {
+  width: 9px;
+  height: 9px;
+  background: #ffffff;
+  opacity: 0.6;
+}
+
+.studio-hero .swiper-pagination-bullet-active {
+  width: 26px;
+  border-radius: 10px;
+  background: #d4ad68;
+  opacity: 1;
+}
+
+/* Mobile Hero Navigation */
+@media (max-width: 640px) {
+  .studio-hero .swiper-button-next,
+  .studio-hero .swiper-button-prev {
+    display: none;
+  }
+}
+/* Hero Slider Navigation Customization */
+.studio-hero {
+  --swiper-navigation-color: #d4ad68;
+  --swiper-pagination-color: #d4ad68;
+  --swiper-navigation-size: 26px;
+  --swiper-navigation-sides-offset: 24px;
+}
+
+.studio-hero .swiper-button-next svg,
+.studio-hero .swiper-button-prev svg {
+  width: 26px;
+  height: 26px;
+  fill: #d4ad68;
 }

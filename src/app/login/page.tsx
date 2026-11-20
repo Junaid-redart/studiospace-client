@@ -16,6 +16,7 @@ export default function LoginPage() {
 
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [isGoogleLoading, setIsGoogleLoading] = useState(false);
 
     const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -41,6 +42,24 @@ export default function LoginPage() {
             toast.error("Something went wrong. Please try again.");
         } finally {
             setIsLoading(false);
+        }
+    };
+    const handleGoogleLogin = async () => {
+        setIsGoogleLoading(true);
+
+        try {
+            const { error } = await authClient.signIn.social({
+                provider: "google",
+                callbackURL: `${window.location.origin}/`,
+            });
+
+            if (error) {
+                toast.error(error.message || "Google login failed");
+                setIsGoogleLoading(false);
+            }
+        } catch {
+            toast.error("Something went wrong with Google login");
+            setIsGoogleLoading(false);
         }
     };
 
@@ -188,6 +207,31 @@ export default function LoginPage() {
                             )}
                         </button>
                     </form>
+
+                    {/* Divider */}
+                    <div className="my-7 flex items-center gap-4">
+                        <div className="h-px flex-1 bg-[#DDD5C8]" />
+
+                        <span className="text-xs font-medium text-gray-500">
+                            OR CONTINUE WITH
+                        </span>
+
+                        <div className="h-px flex-1 bg-[#DDD5C8]" />
+                    </div>
+
+                    {/* Google Login */}
+                    <button
+                        type="button"
+                        onClick={handleGoogleLogin}
+                        disabled={isGoogleLoading}
+                        className="flex w-full items-center justify-center gap-3 rounded-xl border border-[#DDD5C8] bg-[#FFFCF7] px-6 py-3.5 text-sm font-semibold text-[#252525] transition hover:border-[#D4AD68] hover:bg-[#F5F0E8] disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white text-base font-bold text-[#4285F4]">
+                            G
+                        </span>
+
+                        {isGoogleLoading ? "Connecting to Google..." : "Continue with Google"}
+                    </button>
 
                     {/* Register Link */}
                     <p className="mt-8 text-center text-sm text-[#6B6B6B]">

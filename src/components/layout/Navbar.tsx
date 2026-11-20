@@ -12,7 +12,9 @@ import {
   List,
   CalendarDays,
   LogOut,
+  
   UserRound,
+  
 } from "lucide-react";
 
 import { useState } from "react";
@@ -87,6 +89,8 @@ export default function Navbar() {
     }
   };
 
+
+
   const getInitial = (name: string) => {
     return name.charAt(0).toUpperCase();
   };
@@ -116,9 +120,8 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`text-sm font-medium transition-colors hover:text-[#D4AD68] ${
-                  isActive ? "text-[#D4AD68]" : "text-white"
-                }`}
+                className={`text-sm font-medium transition-colors hover:text-[#D4AD68] ${isActive ? "text-[#D4AD68]" : "text-white"
+                  }`}
               >
                 {link.name}
               </Link>
@@ -182,11 +185,13 @@ export default function Navbar() {
                       </Link>
                     );
                   })}
+                  
 
                   <div className="border-t border-[#E8E0D4] pt-2">
                     <button
                       type="button"
                       onClick={handleLogout}
+
                       disabled={isLoggingOut}
                       className="flex w-full items-center gap-3 px-4 py-3 text-left text-sm text-red-600 transition hover:bg-red-50 disabled:opacity-60"
                     >

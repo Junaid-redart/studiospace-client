@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, type SubmitEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff, ArrowRight, Aperture } from "lucide-react";
@@ -13,14 +13,14 @@ export default function RegisterPage() {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [photoURL, setPhotoURL] = useState("");
+
   const [password, setPassword] = useState("");
 
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
 
-  const handleRegister = async (e: FormEvent<HTMLFormElement>) => {
+  const handleRegister = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // Password validation
@@ -46,9 +46,7 @@ export default function RegisterPage() {
         name: name.trim(),
         email: email.trim(),
         password,
-        image: photoURL.trim(),
       });
-
       if (error) {
         toast.error(error.message || "Registration failed");
         return;
@@ -184,25 +182,6 @@ export default function RegisterPage() {
               />
             </div>
 
-            {/* Photo URL */}
-            <div>
-              <label
-                htmlFor="photo"
-                className="mb-2 block text-sm font-semibold text-[#252525]"
-              >
-                Photo URL
-              </label>
-
-              <input
-                id="photo"
-                type="url"
-                placeholder="https://example.com/photo.jpg"
-                className={inputStyle}
-                value={photoURL}
-                onChange={(e) => setPhotoURL(e.target.value)}
-                required
-              />
-            </div>
 
             {/* Password */}
             <div>
@@ -261,29 +240,29 @@ export default function RegisterPage() {
             </button>
           </form>
           {/* Divider */}
-<div className="my-7 flex items-center gap-4">
-  <div className="h-px flex-1 bg-[#DDD5C8]" />
+          <div className="my-7 flex items-center gap-4">
+            <div className="h-px flex-1 bg-[#DDD5C8]" />
 
-  <span className="text-xs font-medium text-gray-500">
-    OR CONTINUE WITH
-  </span>
+            <span className="text-xs font-medium text-gray-500">
+              OR CONTINUE WITH
+            </span>
 
-  <div className="h-px flex-1 bg-[#DDD5C8]" />
-</div>
+            <div className="h-px flex-1 bg-[#DDD5C8]" />
+          </div>
 
-{/* Google Authentication */}
-<button
-  type="button"
-  onClick={handleGoogleLogin}
-  disabled={isGoogleLoading}
-  className="flex w-full items-center justify-center gap-3 rounded-xl border border-[#DDD5C8] bg-[#FFFCF7] px-6 py-3.5 text-sm font-semibold text-[#252525] transition hover:border-[#D4AD68] hover:bg-[#F5F0E8] disabled:cursor-not-allowed disabled:opacity-60"
->
-  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white text-base font-bold text-[#4285F4]">
-    G
-  </span>
+          {/* Google Authentication */}
+          <button
+            type="button"
+            onClick={handleGoogleLogin}
+            disabled={isGoogleLoading}
+            className="flex w-full items-center justify-center gap-3 rounded-xl border border-[#DDD5C8] bg-[#FFFCF7] px-6 py-3.5 text-sm font-semibold text-[#252525] transition hover:border-[#D4AD68] hover:bg-[#F5F0E8] disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white text-base font-bold text-[#4285F4]">
+              G
+            </span>
 
-  {isGoogleLoading ? "Connecting to Google..." : "Continue with Google"}
-</button>
+            {isGoogleLoading ? "Connecting to Google..." : "Continue with Google"}
+          </button>
 
           {/* Login Link */}
           <p className="mt-7 text-center text-sm text-[#6B6B6B]">

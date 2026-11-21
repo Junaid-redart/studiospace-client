@@ -339,7 +339,7 @@ function ExploreStudiosContent() {
                   <div className="mt-auto pt-6">
                     <div className="mb-5 flex items-baseline gap-1 border-t border-[#E8E0D4] pt-5">
                       <span className="text-2xl font-bold text-[#22252A]">
-                        ৳{studio.hourlyRate.toLocaleString()}
+                        ${studio.hourlyRate.toLocaleString()}
                       </span>
 
                       <span className="text-sm text-gray-500">/ hour</span>

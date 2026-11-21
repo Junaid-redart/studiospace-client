@@ -343,14 +343,14 @@ export default function MyBookingsPage() {
                                             <div className="flex justify-between gap-3">
                                                 <span>Studio Rent</span>
                                                 <span>
-                                                    ৳{booking.studioRent.toLocaleString()}
+                                                    ${booking.studioRent.toLocaleString()}
                                                 </span>
                                             </div>
 
                                             <div className="flex justify-between gap-3">
                                                 <span>Security Deposit</span>
                                                 <span>
-                                                    ৳{booking.securityDeposit.toLocaleString()}
+                                                    ${booking.securityDeposit.toLocaleString()}
                                                 </span>
                                             </div>
                                         </div>
@@ -361,7 +361,7 @@ export default function MyBookingsPage() {
                                             </span>
 
                                             <span className="text-xl font-bold text-[#22252A]">
-                                                ৳{booking.totalAmount.toLocaleString()}
+                                                ${booking.totalAmount.toLocaleString()}
                                             </span>
                                         </div>
                                     </div>

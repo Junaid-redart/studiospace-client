@@ -260,7 +260,7 @@ export default function AddStudioPage() {
                         <div className="mt-7 grid gap-6 md:grid-cols-2">
 
                             <div>
-                                <FormLabel>Hourly Rate (BDT)</FormLabel>
+                                <FormLabel>Hourly Rate ($)</FormLabel>
 
                                 <input
                                     type="number"
@@ -274,7 +274,7 @@ export default function AddStudioPage() {
                             </div>
 
                             <div>
-                                <FormLabel>Security Deposit (BDT)</FormLabel>
+                                <FormLabel>Security Deposit ($)</FormLabel>
 
                                 <input
                                     type="number"

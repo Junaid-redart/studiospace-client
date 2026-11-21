@@ -259,7 +259,7 @@ export default function BookingModal({
             <div className="space-y-3 text-sm text-gray-600">
               <div className="flex justify-between gap-3">
                 <span>Hourly Rate</span>
-                <span>৳{studio.hourlyRate.toLocaleString()}</span>
+                <span>${studio.hourlyRate.toLocaleString()}</span>
               </div>
 
               <div className="flex justify-between gap-3">
@@ -273,13 +273,13 @@ export default function BookingModal({
 
               <div className="flex justify-between gap-3">
                 <span>Studio Rent</span>
-                <span>৳{studioRent.toLocaleString()}</span>
+                <span>${studioRent.toLocaleString()}</span>
               </div>
 
               <div className="flex justify-between gap-3">
                 <span>Security Deposit</span>
                 <span>
-                  ৳{studio.securityDeposit.toLocaleString()}
+                  ${studio.securityDeposit.toLocaleString()}
                 </span>
               </div>
             </div>
@@ -287,7 +287,7 @@ export default function BookingModal({
             <div className="mt-4 flex justify-between gap-3 border-t border-[#DED6C9] pt-4 font-bold text-[#22252A]">
               <span>Estimated Total</span>
               <span className="text-xl">
-                ৳{totalAmount.toLocaleString()}
+                ${totalAmount.toLocaleString()}
               </span>
             </div>
           </div>

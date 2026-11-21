@@ -273,7 +273,7 @@ export default function MyListingsPage() {
                                         <div className="mt-5 flex items-center justify-between border-t border-[#E8E0D4] pt-4">
                                             <div>
                                                 <span className="font-heading text-xl font-bold text-[#22252A]">
-                                                    ৳{studio.hourlyRate.toLocaleString()}
+                                                    ${studio.hourlyRate.toLocaleString()}
                                                 </span>
 
                                                 <span className="ml-1 text-xs text-gray-500">

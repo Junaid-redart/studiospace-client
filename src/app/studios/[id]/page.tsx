@@ -264,7 +264,7 @@ export default function StudioDetailsPage() {
 
                         <div className="mt-3 flex items-baseline gap-2">
                             <span className="text-3xl font-bold text-[#22252A]">
-                                ৳{studio.hourlyRate.toLocaleString()}
+                               ${studio.hourlyRate.toLocaleString()}
                             </span>
 
                             <span className="text-sm text-gray-500">/ hour</span>
@@ -274,7 +274,7 @@ export default function StudioDetailsPage() {
                             <InfoRow
                                 icon={<ShieldCheck size={18} />}
                                 label="Security Deposit"
-                                value={`৳${studio.securityDeposit.toLocaleString()}`}
+                                value={`$${studio.securityDeposit.toLocaleString()}`}
                             />
 
                             <InfoRow

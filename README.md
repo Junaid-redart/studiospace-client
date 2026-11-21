@@ -7,13 +7,17 @@ StudioSpace is a full-stack marketplace that connects creative professionals wit
 
 The platform offers secure authentication, studio management, image galleries, and a streamlined booking experience.
 
+
 ## Live Website
 
-**Live Site:** Coming soon — will be updated after deployment.
+**Live Site:** https://studiospace-client-tan.vercel.app/
 
-**Client Repository:** Add your GitHub client repository URL here.
+**Frontend Repository:** https://github.com/Junaid-redart/studiospace-client
 
-**Server Repository:** Add your GitHub server repository URL here.
+**Backend Repository:** https://github.com/Junaid-redart/studiospace-server
+
+**Backend API:** https://studiospace-server-wheat.vercel.app/
+
 
 ## Key Features
 
@@ -174,9 +178,9 @@ The backend checks booking conflicts against existing Confirmed reservations.
 
 A dedicated demo account will be provided before submission.
 
-**Email:** To be added
+**Email:** examiner.demo@example.com
 
-**Password:** To be added
+**Password:** Password123
 
 Use a dedicated test account rather than a personal account.
 

@@ -16,6 +16,7 @@ import {
 
 import { authClient } from "@/lib/auth-client";
 import { toast } from "sonner";
+import ImageUploader from "@/components/common/ImageUploader";
 
 const categories = [
     "Photography Studio",
@@ -46,6 +47,7 @@ export default function AddStudioPage() {
 
     const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [imageUrl, setImageUrl] = useState("");
 
     const user = session?.user;
 
@@ -71,6 +73,10 @@ export default function AddStudioPage() {
         if (isSubmitting) return;
 
         const formData = new FormData(event.currentTarget);
+        if (!imageUrl) {
+            toast.error("Please upload a studio image before publishing.");
+            return;
+        }
 
         const studioData = {
             title: String(formData.get("title") || "").trim(),
@@ -81,7 +87,7 @@ export default function AddStudioPage() {
             maxCapacity: Number(formData.get("capacity")),
 
             location: String(formData.get("location") || "").trim(),
-            imageUrl: String(formData.get("image") || "").trim(),
+            imageUrl: imageUrl,
 
             amenities: selectedAmenities,
 
@@ -126,7 +132,7 @@ export default function AddStudioPage() {
 
             toast.success("Studio created successfully!");
 
-            router.push("/");
+           router.push("/my-listings");
             router.refresh();
         } catch (error) {
             console.error("Create studio error:", error);
@@ -312,22 +318,21 @@ export default function AddStudioPage() {
                             description="Add a high-quality image of your creative space."
                         />
 
-                        <div className="mt-7">
-                            <FormLabel>Image URL</FormLabel>
 
-                            <input
-                                type="url"
-                                name="image"
-                                placeholder="https://example.com/studio-image.jpg"
-                                required
-                                className="studio-input"
+                        <div className="mt-7">
+                            <ImageUploader
+                                value={imageUrl}
+                                onChange={setImageUrl}
                             />
 
-                            <p className="mt-2 text-xs text-gray-500">
-                                Upload your studio photo to an image hosting service
-                                and paste the direct image URL here.
-                            </p>
+                            {!imageUrl && (
+                                <p className="mt-3 text-xs text-gray-500">
+                                    Please select and upload an image before publishing
+                                    your studio.
+                                </p>
+                            )}
                         </div>
+
                     </section>
 
                     {/* Section 5: Amenities */}
@@ -451,7 +456,9 @@ export default function AddStudioPage() {
             </div>
 
             <style jsx global>{`
-        .studio-input {
+
+        .studio-input 
+        {
           width: 100%;
           margin-top: 0.5rem;
           border: 1px solid #ded6c9;

@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 
 import { authClient } from "@/lib/auth-client";
+import ImageUploader from "@/components/common/ImageUploader";
 
 interface Studio {
   _id: string;
@@ -67,6 +68,7 @@ export default function EditStudioPage() {
 
   const [studio, setStudio] = useState<Studio | null>(null);
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
+  const [imageUrl, setImageUrl] = useState("");
 
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -112,6 +114,7 @@ export default function EditStudioPage() {
 
         setStudio(studioData);
         setSelectedAmenities(studioData.amenities);
+        setImageUrl(studioData.imageUrl || "");
       } catch (err) {
         if (controller.signal.aborted) return;
 
@@ -151,6 +154,10 @@ export default function EditStudioPage() {
     }
 
     const formData = new FormData(event.currentTarget);
+    if (!imageUrl) {
+      toast.error("Please upload a studio image before saving.");
+      return;
+    }
 
     const updatedStudio = {
       title: String(formData.get("title") || "").trim(),
@@ -161,7 +168,7 @@ export default function EditStudioPage() {
       maxCapacity: Number(formData.get("maxCapacity")),
 
       location: String(formData.get("location") || "").trim(),
-      imageUrl: String(formData.get("imageUrl") || "").trim(),
+      imageUrl: imageUrl,
 
       amenities: selectedAmenities,
 
@@ -397,25 +404,33 @@ export default function EditStudioPage() {
             </div>
           </section>
 
-          {/* Image */}
+
+          {/* Studio Image */}
           <section className="border-t border-[#E8E0D4] pt-8">
             <SectionHeading
               icon={<Camera size={20} />}
               title="Studio Image"
             />
 
-            <div className="mt-6">
-              <FormLabel>Image URL</FormLabel>
+            <div className="mt-6 space-y-4">
+              <p className="text-sm text-gray-600">
+                Your current studio image is shown below.
+                Upload a new image only if you want to replace it.
+              </p>
 
-              <input
-                name="imageUrl"
-                type="url"
-                defaultValue={studio.imageUrl}
-                required
-                className="edit-input"
+              <ImageUploader
+                value={imageUrl}
+                onChange={setImageUrl}
               />
+
+              {!imageUrl && (
+                <p className="text-sm text-red-600">
+                  Please upload an image before saving your changes.
+                </p>
+              )}
             </div>
           </section>
+
 
           {/* Amenities */}
           <section className="border-t border-[#E8E0D4] pt-8">
@@ -432,11 +447,10 @@ export default function EditStudioPage() {
                 return (
                   <label
                     key={amenity}
-                    className={`flex cursor-pointer items-center gap-2 rounded-lg border p-3 text-sm transition ${
-                      selected
-                        ? "border-[#D4AD68] bg-[#D4AD68]/10"
-                        : "border-[#E8E0D4] hover:border-[#D4AD68]"
-                    }`}
+                    className={`flex cursor-pointer items-center gap-2 rounded-lg border p-3 text-sm transition ${selected
+                      ? "border-[#D4AD68] bg-[#D4AD68]/10"
+                      : "border-[#E8E0D4] hover:border-[#D4AD68]"
+                      }`}
                   >
                     <input
                       type="checkbox"

@@ -12,9 +12,10 @@ import {
   List,
   CalendarDays,
   LogOut,
-  
+  Sun,
+  Moon,
   UserRound,
-  
+
 } from "lucide-react";
 
 import { useState } from "react";
@@ -22,6 +23,7 @@ import { toast } from "sonner";
 
 import { authClient } from "@/lib/auth-client";
 
+import { useTheme } from "next-themes";
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "Explore Studios", href: "/studios" },
@@ -55,6 +57,11 @@ const userLinks = [
 export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
+  const { resolvedTheme, setTheme } = useTheme();
+
+  const toggleTheme = () => {
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+  };
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -132,6 +139,18 @@ export default function Navbar() {
         {/* Desktop Authentication */}
         <div className="hidden items-center gap-4 lg:flex">
 
+          {/* Desktop Theme Toggle */}
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label="Toggle dark and light theme"
+            title="Toggle theme"
+            className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/20 text-[#D4AD68] transition hover:bg-white/10"
+          >
+            <Moon size={20} className="dark:hidden" />
+            <Sun size={20} className="hidden dark:block" />
+          </button>
+
           {isPending ? (
             <div className="h-10 w-24 animate-pulse rounded-lg bg-white/10" />
           ) : user ? (
@@ -185,7 +204,7 @@ export default function Navbar() {
                       </Link>
                     );
                   })}
-                  
+
 
                   <div className="border-t border-[#E8E0D4] pt-2">
                     <button
@@ -227,16 +246,31 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          type="button"
-          className="rounded-lg p-2 text-[#D4AD68] lg:hidden"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={isMenuOpen}
-        >
-          {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
+
+        {/* Mobile Theme Toggle + Menu Button */}
+        <div className="flex items-center gap-2 lg:hidden">
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label="Toggle dark and light theme"
+            title="Toggle theme"
+            className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/20 text-[#D4AD68] transition hover:bg-white/10"
+          >
+            <Moon size={20} className="dark:hidden" />
+            <Sun size={20} className="hidden dark:block" />
+          </button>
+
+          <button
+            type="button"
+            className="rounded-lg p-2 text-[#D4AD68]"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
+          >
+            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
+
       </nav>
 
       {/* Mobile Navigation */}

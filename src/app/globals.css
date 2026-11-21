@@ -153,3 +153,66 @@ html {
 #how-it-works {
   scroll-margin-top: 80px;
 }
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+/* ========================================
+   StudioSpace Dark Theme
+   ======================================== */
+
+html.dark {
+  color-scheme: dark;
+  background-color: #14171c;
+}
+
+/* Main page backgrounds */
+html.dark [class~="bg-[#F5F0E8]"] {
+  background-color: #14171c;
+}
+
+/* Cards, forms and content sections */
+html.dark [class~="bg-[#FFFCF7]"],
+html.dark [class~="bg-white"] {
+  background-color: #22262e;
+}
+
+/* Main text colors */
+html.dark [class~="text-[#22252A]"]:not([class~="bg-[#D4AD68]"]),
+html.dark [class~="text-[#333]"],
+html.dark [class~="text-[#252525]"] {
+  color: #f5f0e8;
+}
+
+/* Secondary text */
+html.dark [class~="text-gray-600"],
+html.dark [class~="text-gray-500"],
+html.dark [class~="text-[#666]"] {
+  color: #bac0ca;
+}
+
+/* Borders */
+html.dark [class~="border-[#E8E0D4]"],
+html.dark [class~="border-[#DED6C9]"] {
+  border-color: #414650;
+}
+
+/* Input fields */
+html.dark .studio-input,
+html.dark .edit-input {
+  background-color: #292e37;
+  border-color: #414650;
+  color: #f5f0e8;
+}
+
+/* Read-only form fields */
+html.dark .studio-input:read-only,
+html.dark .edit-input:read-only {
+  background-color: #353a43;
+  color: #d6d9df;
+}
+
+/* Standard placeholder text */
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #9299a5;
+}

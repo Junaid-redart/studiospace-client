@@ -13,7 +13,7 @@ export default function RegisterPage() {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-
+  const [photoURL, setPhotoURL] = useState("");
   const [password, setPassword] = useState("");
 
   const [showPassword, setShowPassword] = useState(false);
@@ -46,6 +46,7 @@ export default function RegisterPage() {
         name: name.trim(),
         email: email.trim(),
         password,
+        ...(photoURL.trim() ? { image: photoURL.trim() } : {}),
       });
       if (error) {
         toast.error(error.message || "Registration failed");

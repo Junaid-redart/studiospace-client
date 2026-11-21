@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import BookingModal from "@/components/booking/BookingModal";
 import StudioGalleryCarousel from "@/components/common/StudioGalleryCarousel";
+import StudioReviews from "@/components/reviews/StudioReviews";
 
 import {
     ArrowLeft,
@@ -246,14 +247,11 @@ export default function StudioDetailsPage() {
                             </div>
                         </section>
 
-                        {/* Reviews */}
-                        <section className="rounded-2xl border border-[#E8E0D4] bg-[#FFFCF7] p-6 sm:p-8">
-                            <SectionTitle title="Guest Reviews" />
-
-                            <p className="mt-4 text-sm text-gray-500">
-                                Reviews are not available yet.
-                            </p>
-                        </section>
+                        {/* Guest Reviews */}
+                        <StudioReviews
+                            studioId={studio._id}
+                            ownerEmail={studio.ownerEmail}
+                        />
                     </div>
 
                     {/* Right Pricing Card */}
@@ -264,7 +262,7 @@ export default function StudioDetailsPage() {
 
                         <div className="mt-3 flex items-baseline gap-2">
                             <span className="text-3xl font-bold text-[#22252A]">
-                               ${studio.hourlyRate.toLocaleString()}
+                                ${studio.hourlyRate.toLocaleString()}
                             </span>
 
                             <span className="text-sm text-gray-500">/ hour</span>

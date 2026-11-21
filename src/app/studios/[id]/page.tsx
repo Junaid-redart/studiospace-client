@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import BookingModal from "@/components/booking/BookingModal";
+import StudioGalleryCarousel from "@/components/common/StudioGalleryCarousel";
 
 import {
     ArrowLeft,
@@ -14,8 +15,7 @@ import {
     CheckCircle2,
     CalendarDays,
     UserRound,
-    RefreshCw,
-    ImageOff,
+    RefreshCw
 } from "lucide-react";
 
 interface Studio {
@@ -27,6 +27,7 @@ interface Studio {
     maxCapacity: number;
     location: string;
     imageUrl: string;
+    images?: string[];
     amenities: string[];
     overview: string;
     ownerName: string;
@@ -41,7 +42,6 @@ export default function StudioDetailsPage() {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
     const [reloadKey, setReloadKey] = useState(0);
-    const [imageError, setImageError] = useState(false);
     const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
     useEffect(() => {
@@ -51,7 +51,6 @@ export default function StudioDetailsPage() {
             setIsLoading(true);
             setError("");
             setStudio(null);
-            setImageError(false);
 
             try {
                 const response = await fetch(
@@ -175,23 +174,16 @@ export default function StudioDetailsPage() {
                     </div>
                 </div>
 
-                {/* Main Image */}
-                <div className="mb-9 overflow-hidden rounded-2xl border border-[#E8E0D4] bg-[#E8E0D4]">
-                    {imageError || !studio.imageUrl ? (
-                        <div className="flex h-64 flex-col items-center justify-center gap-3 text-gray-500 sm:h-[440px]">
-                            <ImageOff size={44} />
-                            <span className="text-sm">Studio image unavailable</span>
-                        </div>
-                    ) : (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                            src={studio.imageUrl}
-                            alt={studio.title}
-                            onError={() => setImageError(true)}
-                            className="h-64 w-full object-cover sm:h-[440px]"
-                        />
-                    )}
+
+                {/* Studio Image Gallery */}
+                <div className="mb-9">
+                    <StudioGalleryCarousel
+                        images={studio.images}
+                        imageUrl={studio.imageUrl}
+                        title={studio.title}
+                    />
                 </div>
+
 
                 <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_340px]">
 

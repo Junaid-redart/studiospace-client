@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 
 import { authClient } from "@/lib/auth-client";
-import ImageUploader from "@/components/common/ImageUploader";
+import StudioGalleryUploader from "@/components/common/StudioGalleryUploader";
 
 interface Studio {
   _id: string;
@@ -27,6 +27,7 @@ interface Studio {
   maxCapacity: number;
   location: string;
   imageUrl: string;
+  images?: string[];
   amenities: string[];
   overview: string;
   ownerId: string;
@@ -68,7 +69,7 @@ export default function EditStudioPage() {
 
   const [studio, setStudio] = useState<Studio | null>(null);
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
-  const [imageUrl, setImageUrl] = useState("");
+  const [images, setImages] = useState<string[]>([]);
 
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -114,7 +115,14 @@ export default function EditStudioPage() {
 
         setStudio(studioData);
         setSelectedAmenities(studioData.amenities);
-        setImageUrl(studioData.imageUrl || "");
+
+        setImages(
+          studioData.images && studioData.images.length > 0
+            ? studioData.images
+            : studioData.imageUrl
+              ? [studioData.imageUrl]
+              : []
+        );
       } catch (err) {
         if (controller.signal.aborted) return;
 
@@ -154,11 +162,10 @@ export default function EditStudioPage() {
     }
 
     const formData = new FormData(event.currentTarget);
-    if (!imageUrl) {
-      toast.error("Please upload a studio image before saving.");
+    if (images.length === 0) {
+      toast.error("Please keep at least one studio image.");
       return;
     }
-
     const updatedStudio = {
       title: String(formData.get("title") || "").trim(),
       category: String(formData.get("category") || "").trim(),
@@ -168,7 +175,8 @@ export default function EditStudioPage() {
       maxCapacity: Number(formData.get("maxCapacity")),
 
       location: String(formData.get("location") || "").trim(),
-      imageUrl: imageUrl,
+      imageUrl: images[0],
+      images: images,
 
       amenities: selectedAmenities,
 
@@ -406,6 +414,8 @@ export default function EditStudioPage() {
 
 
           {/* Studio Image */}
+
+          {/* Studio Image */}
           <section className="border-t border-[#E8E0D4] pt-8">
             <SectionHeading
               icon={<Camera size={20} />}
@@ -414,22 +424,23 @@ export default function EditStudioPage() {
 
             <div className="mt-6 space-y-4">
               <p className="text-sm text-gray-600">
-                Your current studio image is shown below.
-                Upload a new image only if you want to replace it.
+                Manage your studio gallery. You can upload up to 10 images.
+                The first image will be your cover photo.
               </p>
 
-              <ImageUploader
-                value={imageUrl}
-                onChange={setImageUrl}
+              <StudioGalleryUploader
+                images={images}
+                onChange={setImages}
               />
 
-              {!imageUrl && (
+              {images.length === 0 && (
                 <p className="text-sm text-red-600">
-                  Please upload an image before saving your changes.
+                  Please keep at least one image before saving your changes.
                 </p>
               )}
             </div>
           </section>
+
 
 
           {/* Amenities */}

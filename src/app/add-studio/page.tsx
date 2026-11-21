@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+
 import {
     Aperture,
     ArrowLeft,
@@ -16,7 +17,7 @@ import {
 
 import { authClient } from "@/lib/auth-client";
 import { toast } from "sonner";
-import ImageUploader from "@/components/common/ImageUploader";
+import StudioGalleryUploader from "@/components/common/StudioGalleryUploader";
 
 const categories = [
     "Photography Studio",
@@ -47,8 +48,7 @@ export default function AddStudioPage() {
 
     const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [imageUrl, setImageUrl] = useState("");
-
+    const [images, setImages] = useState<string[]>([]);
     const user = session?.user;
 
     // Protect private page
@@ -73,8 +73,8 @@ export default function AddStudioPage() {
         if (isSubmitting) return;
 
         const formData = new FormData(event.currentTarget);
-        if (!imageUrl) {
-            toast.error("Please upload a studio image before publishing.");
+        if (images.length === 0) {
+            toast.error("Please upload at least one studio image.");
             return;
         }
 
@@ -87,7 +87,8 @@ export default function AddStudioPage() {
             maxCapacity: Number(formData.get("capacity")),
 
             location: String(formData.get("location") || "").trim(),
-            imageUrl: imageUrl,
+            imageUrl: images[0],
+            images: images,
 
             amenities: selectedAmenities,
 
@@ -132,7 +133,7 @@ export default function AddStudioPage() {
 
             toast.success("Studio created successfully!");
 
-           router.push("/my-listings");
+            router.push("/my-listings");
             router.refresh();
         } catch (error) {
             console.error("Create studio error:", error);
@@ -319,19 +320,21 @@ export default function AddStudioPage() {
                         />
 
 
+
                         <div className="mt-7">
-                            <ImageUploader
-                                value={imageUrl}
-                                onChange={setImageUrl}
+                            <StudioGalleryUploader
+                                images={images}
+                                onChange={setImages}
                             />
 
-                            {!imageUrl && (
+                            {images.length === 0 && (
                                 <p className="mt-3 text-xs text-gray-500">
-                                    Please select and upload an image before publishing
-                                    your studio.
+                                    Upload at least one image before publishing your studio.
+                                    The first uploaded image will be the cover photo.
                                 </p>
                             )}
                         </div>
+
 
                     </section>
 

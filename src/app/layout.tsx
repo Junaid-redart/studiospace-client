@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import { Toaster } from "sonner";
+import Footer from "@/components/layout/Footer";
 
 // Heading Font
 const plusJakarta = Plus_Jakarta_Sans({
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           richColors
           closeButton
         />
+        <Footer />
       </body>
     </html>
   );

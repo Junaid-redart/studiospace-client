@@ -147,3 +147,9 @@ h6 {
   height: 26px;
   fill: #d4ad68;
 }
+html {
+  scroll-behavior: smooth;
+}
+#how-it-works {
+  scroll-margin-top: 80px;
+}

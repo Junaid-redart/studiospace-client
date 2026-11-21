@@ -1,8 +1,10 @@
 
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+
 import {
   ArrowRight,
   MapPin,
@@ -27,11 +29,17 @@ interface Studio {
   ownerName: string;
 }
 
-export default function ExploreStudiosPage() {
+function ExploreStudiosContent() {
+  const searchParams = useSearchParams();
+
+  const categoryFromUrl = searchParams.get("category");
+
   const [studios, setStudios] = useState<Studio[]>([]);
   const [search, setSearch] = useState("");
-  const [selectedCategory, setSelectedCategory] =
-    useState("All Categories");
+
+  const [selectedCategory, setSelectedCategory] = useState(
+    categoryFromUrl || "All Categories"
+  );
 
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
@@ -92,12 +100,16 @@ export default function ExploreStudiosPage() {
 
   // Categories come from actual MongoDB data
   const categories = useMemo(() => {
-    const uniqueCategories = [
-      ...new Set(studios.map((studio) => studio.category)),
-    ];
+  const uniqueCategories = new Set(
+    studios.map((studio) => studio.category)
+  );
 
-    return ["All Categories", ...uniqueCategories.sort()];
-  }, [studios]);
+  if (categoryFromUrl) {
+    uniqueCategories.add(categoryFromUrl);
+  }
+
+  return ["All Categories", ...Array.from(uniqueCategories).sort()];
+}, [studios, categoryFromUrl]);
 
   // Search and category filtering
   const filteredStudios = useMemo(() => {
@@ -199,9 +211,8 @@ export default function ExploreStudiosPage() {
             <p className="mt-1 text-sm text-gray-500">
               {isLoading
                 ? "Loading creative spaces..."
-                : `${filteredStudios.length} ${
-                    filteredStudios.length === 1 ? "studio" : "studios"
-                  } found`}
+                : `${filteredStudios.length} ${filteredStudios.length === 1 ? "studio" : "studios"
+                } found`}
             </p>
           </div>
 
@@ -349,5 +360,18 @@ export default function ExploreStudiosPage() {
         )}
       </div>
     </main>
+  );
+}
+export default function ExploreStudiosPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="flex min-h-[70vh] items-center justify-center bg-[#F5F0E8]">
+          <span className="loading loading-spinner loading-lg text-[#D4AD68]" />
+        </main>
+      }
+    >
+      <ExploreStudiosContent />
+    </Suspense>
   );
 }

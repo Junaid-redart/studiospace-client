@@ -55,7 +55,7 @@ export default function StudioDetailsPage() {
 
             try {
                 const response = await fetch(
-                    `${process.env.NEXT_PUBLIC_API_URL}/api/studios/${studioId}`,
+                    `/api/studios/${studioId}`,
                     { signal: controller.signal }
                 );
 

@@ -104,12 +104,7 @@ export default function StudioGalleryUploader({
       return;
     }
 
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
-    if (!apiUrl) {
-      toast.error("API URL is not configured.");
-      return;
-    }
+    
 
     setIsUploading(true);
 
@@ -117,7 +112,7 @@ export default function StudioGalleryUploader({
       const formData = new FormData();
       formData.append("image", selectedFile);
 
-      const response = await fetch(`${apiUrl}/api/upload`, {
+      const response = await fetch("/api/upload", {
         method: "POST",
         credentials: "include",
         body: formData,

@@ -60,7 +60,7 @@ export default function ImageUploader({
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/upload`,
+        `/api/upload`,
         {
           method: "POST",
           credentials: "include",

@@ -1,8 +1,9 @@
+
 import { createAuthClient } from "better-auth/react";
 
 export const authClient = createAuthClient({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
-
+  // Uses the frontend's /api/auth endpoint.
+  // Next.js forwards requests to the Express backend.
   fetchOptions: {
     credentials: "include",
   },

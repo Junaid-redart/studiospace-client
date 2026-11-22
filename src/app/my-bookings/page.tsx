@@ -90,7 +90,7 @@ export default function MyBookingsPage() {
 
             try {
                 const response = await fetch(
-                    `${process.env.NEXT_PUBLIC_API_URL}/api/bookings/my-bookings`,
+                    `/api/bookings/my-bookings`,
                     {
                         credentials: "include",
                         signal: controller.signal,
@@ -136,7 +136,7 @@ export default function MyBookingsPage() {
 
         try {
             const response = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/api/bookings/${cancelBookingId}/cancel`,
+                `/api/bookings/${cancelBookingId}/cancel`,
                 {
                     method: "PATCH",
                     credentials: "include",

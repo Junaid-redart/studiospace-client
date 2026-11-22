@@ -55,7 +55,7 @@ function ExploreStudiosContent() {
 
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/studios`,
+          `/api/studios`,
           {
             signal: controller.signal,
           }

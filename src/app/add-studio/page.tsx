@@ -95,16 +95,13 @@ export default function AddStudioPage() {
             overview: String(formData.get("description") || "").trim(),
         };
 
-        if (!process.env.NEXT_PUBLIC_API_URL) {
-            toast.error("API URL is not configured");
-            return;
-        }
+        
 
         setIsSubmitting(true);
 
         try {
             const response = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/api/studios`,
+                `/api/studios`,
                 {
                     method: "POST",
 

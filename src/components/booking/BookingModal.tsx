@@ -103,7 +103,7 @@ export default function BookingModal({
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/bookings`,
+        `/api/bookings`,
         {
           method: "POST",
           headers: {

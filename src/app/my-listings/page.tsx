@@ -66,7 +66,7 @@ export default function MyListingsPage() {
 
             try {
                 const response = await fetch(
-                    `${process.env.NEXT_PUBLIC_API_URL}/api/studios/my-listings`,
+                    `/api/studios/my-listings`,
                     {
                         credentials: "include",
                         signal: controller.signal,
@@ -121,7 +121,7 @@ export default function MyListingsPage() {
 
         try {
             const response = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/api/studios/${deleteStudioId}`,
+                `/api/studios/${deleteStudioId}`,
                 {
                     method: "DELETE",
                     credentials: "include",

@@ -92,7 +92,7 @@ export default function EditStudioPage() {
 
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/studios/${studioId}`,
+          `/api/studios/${studioId}`,
           {
             credentials: "include",
             signal: controller.signal,
@@ -187,7 +187,7 @@ export default function EditStudioPage() {
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/studios/${studioId}`,
+        `/api/studios/${studioId}`,
         {
           method: "PATCH",
 

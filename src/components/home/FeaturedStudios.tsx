@@ -40,7 +40,7 @@ export default function FeaturedStudios() {
 
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/studios/featured`,
+          `/api/studios/featured`,
           {
             signal: controller.signal,
           }

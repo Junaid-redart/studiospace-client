@@ -55,7 +55,7 @@ export default function StudioReviews({
     async function loadReviews() {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/reviews/studio/${studioId}`,
+          `/api/reviews/studio/${studioId}`,
           {
             signal: controller.signal,
           }
@@ -111,7 +111,7 @@ export default function StudioReviews({
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/reviews/studio/${studioId}`,
+        `/api/reviews/studio/${studioId}`,
         {
           method: "POST",
           credentials: "include",

@@ -54,15 +54,15 @@ export default function DashboardPage() {
       setError("");
 
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
 
         const [studiosResponse, bookingsResponse] =
           await Promise.all([
-            fetch(`${apiUrl}/api/studios/my-listings`, {
+            fetch("/api/studios/my-listings", {
               credentials: "include",
               signal: controller.signal,
             }),
-            fetch(`${apiUrl}/api/bookings/my-bookings`, {
+            fetch("/api/bookings/my-bookings", {
               credentials: "include",
               signal: controller.signal,
             }),

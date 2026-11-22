@@ -188,7 +188,8 @@ Use a dedicated test account rather than a personal account.
 
 - Advanced studio availability calendar
 - Online payments
-- Guest ratings and reviews
+
+**Studio Reviews & Ratings:** Authenticated guests can submit ratings and reviews. Average ratings and review counts appear on studio cards and details pages.
 - Host-side booking confirmation workflow
 
 ## Author

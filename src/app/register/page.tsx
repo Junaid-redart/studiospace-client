@@ -183,6 +183,25 @@ export default function RegisterPage() {
               />
             </div>
 
+            {/* Photo URL */}
+            <div>
+              <label
+                htmlFor="photoURL"
+                className="mb-2 block text-sm font-semibold text-[#252525]"
+              >
+                Photo URL (Optional)
+              </label>
+
+              <input
+                id="photoURL"
+                type="url"
+                placeholder="https://example.com/photo.jpg"
+                className={inputStyle}
+                value={photoURL}
+                onChange={(e) => setPhotoURL(e.target.value)}
+              />
+            </div>
+
 
             {/* Password */}
             <div>

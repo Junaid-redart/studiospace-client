@@ -227,7 +227,7 @@ export default function Footer() {
                 <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-6 text-center text-xs text-gray-400 sm:flex-row sm:items-center sm:justify-between sm:text-left lg:px-8">
 
                     <p>
-                        © {new Date().getFullYear()} StudioSpace.
+                        {"\u00A9"} {new Date().getFullYear()} StudioSpace.
                         All rights reserved.
                     </p>
 
